@@ -43,33 +43,47 @@ function getWinner(playerMove,computerMove) {
     switch(playerMove){
         //Testing cases of the player's moves
         case "rock":
-            if(computerMove=="scissors" && computerMove != playerMove){
-                winner="player";
-            } else {
-                //in this case computerMove is assumed to be: paper
-                winner="computer";
+            switch(computerMove){
+                case "scissors":
+                    winner="player";
+                    break;
+                case "paper":
+                    winner="computer";
+                    break;
+                case "rock":
+                    winner="tie";
+                    break;
             }
             break;
         case "scissors":
-            if(computerMove=="paper" && computerMove != playerMove){
-                winner="player";
-            } else {
-                //in this case computerMove is assumed to be: rock
-                winner="computer";
+            switch(computerMove){
+                case "scissors":
+                    winner="tie";
+                    break;
+                case "paper":
+                    winner="player";
+                    break;
+                case "rock":
+                    winner="computer";
+                    break;
             }
             break;
         case "paper":
-            if(computerMove=="rock" && computerMove != playerMove){
-                winner="player";
-            } else {
-                //in this case computerMove is assumed to be: scissors
-                winner="computer";
+            switch(computerMove){
+                case "scissors":
+                    winner="computer";
+                    break;
+                case "paper":
+                    winner="tie";
+                    break;
+                case "rock":
+                    winner="player";
+                    break;
             }
             break;
         default:
-            if (computerMove == playerMove){
-                winner="tie"
-            }
+            console.log('Please type a valid command.');
+            winner = '';
     }   
     return winner;
 }
@@ -78,6 +92,9 @@ function playToFive() {
     console.log("Let's play Rock, Paper, Scissors");
     var playerWins = 0;
     var computerWins = 0;
+    var playerMove;
+    var computerMove;
+    var winner;
     // This function should continue to play Rock Paper Scissors until either the
     // player or the computer has won five times.
     // After each 'round', display some text in the console indicating who played
@@ -85,13 +102,43 @@ function playToFive() {
     // For example,
     //  console.log('Player chose ' + playerMove + ' while Computer chose ' + computerMove);
     //  console.log('The score is currently ' + playerWins + ' to ' + computerWins + '\n');
-    while(playerWins > 6 || computerWins > 6){
-        //some more code I guess for actually playing the game. 
-        //HW 6
-        console.log('Player chose: ' + playerMove + '; Computer chose: ' + computerMove + ";");
-        console.log('The score is currently ' + playerWins + ' to ' + computerWins + ' (Player to Computer.');
-
+    while(playerWins <= 4 && computerWins <= 4){
+        console.log('Please type your move: ');
+        playerMove = getPlayerMove();
+        computerMove = getComputerMove();
+        winner = getWinner(playerMove,computerMove);
+        
+        switch (winner){
+            case 'player':
+                playerWins +=1;
+                console.log('The winner is the ' + winner);
+                console.log('Player chose: ' + playerMove + '; Computer chose: ' + computerMove + ";");
+                console.log('The score is currently ' + playerWins + ' to ' + computerWins + ' (Player to Computer).');
+                console.log('');
+                break;
+            case 'computer':
+                computerWins +=1;
+                console.log('The winner is the ' + winner);
+                console.log('Player chose: ' + playerMove + '; Computer chose: ' + computerMove + ";");
+                console.log('The score is currently ' + playerWins + ' to ' + computerWins + ' (Player to Computer).');
+                    console.log('');
+                break;
+            default:
+                console.log('The result was a draw');
+                console.log('Player chose: ' + playerMove + '; Computer chose: ' + computerMove + ";");
+                console.log('The score is currently ' + playerWins + ' to ' + computerWins + ' (Player to Computer).');
+                console.log('');
+                break;
+        }
+        
     }
+    
+    if(playerWins==5){
+        console.log('Congrats on beating the Browser!');
+    }else{
+        console.log('Sorry, but the Browser won.');
+    }
+    
     return [playerWins, computerWins];
 }
 
