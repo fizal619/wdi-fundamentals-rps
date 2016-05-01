@@ -87,7 +87,7 @@ function playToFive() {
     //  console.log('The score is currently ' + playerWins + ' to ' + computerWins + '\n');
     while(playerWins > 6 || computerWins > 6){
         //some more code I guess for actually playing the game. 
-
+        //HW 6
         console.log('Player chose: ' + playerMove + '; Computer chose: ' + computerMove + ";");
         console.log('The score is currently ' + playerWins + ' to ' + computerWins + ' (Player to Computer.');
 
